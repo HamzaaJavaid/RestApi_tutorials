@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'Model/PostModel.dart';
+import 'Model/PostsModel.dart';
 
 
 void main() {
@@ -19,33 +19,39 @@ class _MyAppState extends State<MyApp> {
 
 
 
-  List<PostModel> postList = [];
-  
-  Future<List<PostModel>> getPost()async{
+  List<PostsModel>  allPostsList = [];
+
+  Future<List<PostsModel>> getAllPosts()async{
+
     final response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts"));
     var data = jsonDecode(response.body.toString());
-    if(response.statusCode == 200){
+
+    if(response.statusCode==200){
       for(Map i in data){
-        postList.add(PostModel.fromJson(i));
+        allPostsList.add(PostsModel.fromJson(i));
+      }
+      for(int i = 0 ; i<allPostsList.length ; i++){
+        print(allPostsList[i].title.toString());
       }
     }
     else{
-
-      return postList;
+      print("api not hit");
     }
+    return allPostsList;
 
-    return postList;
   }
+
+
+
+
   
-  
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getAllPosts();
 
-   
-
-    
   }
 
   @override
@@ -55,21 +61,32 @@ class _MyAppState extends State<MyApp> {
         body: SafeArea(
           child: Column(
             children: [
-              Expanded(child: FutureBuilder(
-                future: getPost(),
-                builder: (context ,snapshot){
-                  if(!snapshot.hasData){
-                    return const Center(child: Text("Loading Data"));
-                  }
-                  return ListView.builder(
-                      itemCount: postList.length,
+              Expanded(
+                child: FutureBuilder(
+                  future: getAllPosts(),
+                  builder: (context, snapshot){
+                    if(!snapshot.hasData){
+                      return Center(child: CircularProgressIndicator(
+                        backgroundColor: Colors.green,
+                        color: Colors.orangeAccent,
+                      ),);
+                    }
+                    return ListView.builder(
+                      itemCount: allPostsList.length,
                       itemBuilder: (context,index){
-                        return ListTile(
-                          title: Text(postList[index].title.toString()),
+                        return Card(
+                          child: ListTile(
+                            title: Text(allPostsList[index].title.toString()),
+                            subtitle: Text(allPostsList[index].body.toString()),
+                            trailing: Text(allPostsList[index].id.toString()),
+                          ),
                         );
-                      });
-                },
-              ))
+                      },
+                    );
+                  },
+
+                ),
+              )
             ],
           )
           

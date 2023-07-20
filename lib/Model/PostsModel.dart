@@ -1,5 +1,5 @@
-class PostModel {
-  PostModel({
+class PostsModel {
+  PostsModel({
       int? userId, 
       int? id, 
       String? title, 
@@ -10,7 +10,7 @@ class PostModel {
     _body = body;
 }
 
-  PostModel.fromJson(dynamic json) {
+  PostsModel.fromJson(dynamic json) {
     _userId = json['userId'];
     _id = json['id'];
     _title = json['title'];
@@ -20,16 +20,6 @@ class PostModel {
   int? _id;
   String? _title;
   String? _body;
-
-PostModel copyWith({  int? userId,
-  int? id,
-  String? title,
-  String? body,
-}) => PostModel(  userId: userId ?? _userId,
-  id: id ?? _id,
-  title: title ?? _title,
-  body: body ?? _body,
-);
 
   int? get userId => _userId;
   int? get id => _id;
