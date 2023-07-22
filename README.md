@@ -1,16 +1,13 @@
 # restapi_tutorials
 
-A new Flutter project.
 
-## Getting Started
+## About Tutorials 
 
-This project is a starting point for a Flutter application.
+This project include all types of implementation of models used to fetch data from API
 
-A few resources to get you started if this is your first Flutter project:
+# Features  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- with model data fetching 
+- without model data fetching
+- Custom Models
+- Json Formating
