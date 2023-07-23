@@ -4,7 +4,7 @@ App that includes all Kind of Data fetching from API & it's models with Json For
 
 ## About Tutorial 🤩   
 
-This project include all types of implementation of models used to fetch data from API
+This project include all types of implementation of models used to fetch data from API 💥
 
 ## Features 🤳    
 
