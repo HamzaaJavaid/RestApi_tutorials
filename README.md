@@ -10,5 +10,5 @@ This project include all types of implementation of models used to fetch data fr
 
 - with model data fetching 🤖
 - without model data fetching 👑  
-- Custom Models
+- Custom Models 🌟
 - Json Formating
