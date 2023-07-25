@@ -90,7 +90,7 @@ class _authenticationScreenusingAPIState extends State<authenticationScreenusing
               MaterialButton(
                 onPressed: (){
                   SignupAPI(emailController.text.toString() , passwordController.text.toString());
-                 
+
 
                 },
                   shape: OutlineInputBorder(
