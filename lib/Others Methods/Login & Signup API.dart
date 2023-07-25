@@ -29,7 +29,21 @@ class _authenticationScreenusingAPIState extends State<authenticationScreenusing
     }
 
   }
-  
+  void LoginAPI(String email , String password)async{
+
+    Response response = await  post(Uri.parse("https://reqres.in/api/login"), body: {
+      "email" : email.toString(),
+      "password" : password.toString(),
+    });
+
+    if(response.statusCode== 200){
+      print("API HIT");
+    }
+    else{
+      print('API not Hit');
+    }
+
+  }
   Widget build(BuildContext context) {
     return  MaterialApp(
       home: Scaffold(
@@ -76,6 +90,8 @@ class _authenticationScreenusingAPIState extends State<authenticationScreenusing
               MaterialButton(
                 onPressed: (){
                   SignupAPI(emailController.text.toString() , passwordController.text.toString());
+                 
+
                 },
                   shape: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent),
@@ -85,6 +101,22 @@ class _authenticationScreenusingAPIState extends State<authenticationScreenusing
                   minWidth: MediaQuery.of(context).size.width /1.1,
                   height: MediaQuery.of(context).size.height /13,
                 child : Text('SignUp')
+              ),
+              SizedBox(height: 6,),
+              MaterialButton(
+                  onPressed: (){
+
+                    LoginAPI(emailController.text.toString() , passwordController.text.toString());
+
+                  },
+                  shape: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  color: Colors.redAccent,
+                  minWidth: MediaQuery.of(context).size.width /1.1,
+                  height: MediaQuery.of(context).size.height /13,
+                  child : Text('Login')
               )
 
 
