@@ -17,24 +17,25 @@ class _veryComplexJsonState extends State<veryComplexJson> {
 
 
 
-
-
-  var data ;
   Future<VeryComplexJsonModel> getDataFromAPI()async{
 
-    final response = await http.get(Uri.parse("https://webhook.site/c186341a-9197-4f2d-868a-019d1d6ba6a0"));
-    data = jsonDecode(response.body.toString());
+    final response = await http.get(Uri.parse("https://webhook.site/8cf6d09a-fc2c-4abc-aced-be5cc94922dd"));
+    var data = jsonDecode(response.body.toString());
 
-    if(response.statusCode==200){
+    if(response.statusCode== 200){
       return VeryComplexJsonModel.fromJson(data);
     }
+
     else{
-      print("API not hit");
+      return VeryComplexJsonModel.fromJson(data);
     }
-     return VeryComplexJsonModel.fromJson(data);
 
 
-  }
+}
+
+
+
+
 
   @override
 
@@ -54,31 +55,28 @@ class _veryComplexJsonState extends State<veryComplexJson> {
           minimum: EdgeInsets.all(20),
           child: FutureBuilder(
             future: getDataFromAPI(),
-            builder: (context,AsyncSnapshot<VeryComplexJsonModel> snapshot){
+            builder: (context , AsyncSnapshot<VeryComplexJsonModel> snapshot){
               if(snapshot.connectionState == ConnectionState.waiting){
                 return Center(child: CircularProgressIndicator(),);
               }
               return ListView.builder(
                 itemCount: snapshot.data?.data?.length,
-                  itemBuilder: (context,index){
-                  return Column(
-                    children: [
-                      Text("Status : ${snapshot.data?.success.toString()}"),
-                      Text("ID : ${snapshot.data?.data?[index].id.toString()}"),
-                      Text("Image URL :${snapshot.data?.data?[index].categories?.image.toString()} ",style: TextStyle(
-                        color: Colors.blue
-                      ),),
-                      Text("Name :${snapshot.data?.data?[index].subcat?.name.toString()} ",),
-                      Text("ShopCity :${snapshot.data?.data?[index].shop?.shopcity.toString()} ",),
-                      Text("Price  :${snapshot.data?.data?[index].price.toString()} ",),
-
-
-                    ],
+                itemBuilder: (context , index){
+                  return ListTile(
+                    shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))
+                    ),
+                    title: Text(snapshot.data!.data![index].title.toString()),
+                    subtitle: Text(snapshot.data!.data![index].shop!.shopemail.toString()),
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(snapshot.data!.data![index].categories!.image.toString()),
+                    ),
+                    trailing: Text(snapshot.data!.data![index].price.toString()),
                   );
-                  }
+                },
               );
             },
-          ),
+          )
         ),
       ),
     );
